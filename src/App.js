@@ -7,14 +7,33 @@ function App() {
   
   const handleNewTodoSubmit = (event) => {
     event.preventDefault();
-  }
+    setTodos([...todos, newTodo])
+    setNewToDo("");
+  };
+
   return (
     <div>
       <form onSubmit={(event) =>{
         handleNewTodoSubmit(event);
       }}>
-        <input type="text"/>
+        <input onChange={(event) => {
+          setNewToDo(event.target.value);
+        }} 
+        type="text"
+        value={newTodo}
+        />
+        <div>
+          <button>Add</button>
+        </div>
       </form>
+
+      {todos.map((todo, i) => {
+          return (
+            <div key = {i}>
+              <span>{todo}</span>
+            </div>
+        );
+      })}
     </div>
   );
 }
